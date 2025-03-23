@@ -1,4 +1,6 @@
-import { unsigned } from 'buffer-crc32';
+import crc32 from 'buffer-crc32';
+
+import { english } from './english';
 
 const MN_DEFAULT_WORDSET = 'english';
 
@@ -8,7 +10,7 @@ function mn_get_checksum_index(words: Array<string>, prefixLen: number) {
   for (let i = 0; i < words.length; i++) {
     trimmedWords += words[i].slice(0, prefixLen);
   }
-  const checksum = unsigned(trimmedWords as any);
+  const checksum = crc32.unsigned(trimmedWords as any);
   const index = checksum % words.length;
   return index;
 }
@@ -90,14 +92,13 @@ const mnWords = {} as Record<
   string,
   {
     prefixLen: number;
-    words: any;
-    truncWords: Array<any>;
+    words: Array<string>;
+    truncWords: Array<string>;
   }
 >;
 mnWords.english = {
   prefixLen: 3,
-  // eslint-disable-next-line global-require
-  words: require('./english.json'),
+  words: english,
   truncWords: [],
 };
 

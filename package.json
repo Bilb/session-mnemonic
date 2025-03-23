@@ -1,5 +1,5 @@
 {
-  "name": "session-foundation-mnemonic",
+  "name": "@session-foundation/mnemonic",
   "version": "0.0.7",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
